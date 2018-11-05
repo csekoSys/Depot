@@ -20,4 +20,11 @@ public class PartCategory {
     public String getName() {
         return name.get();
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
+    
+    
 }

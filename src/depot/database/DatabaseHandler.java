@@ -59,7 +59,8 @@ public final class DatabaseHandler {
                         + "part_categories_id INTEGER,\n"
                         + "name VARCHAR(255),\n"
                         + "barcode VARCHAR(255),\n"
-                        + "quantity INTEGER(100)"
+                        + "quantity INTEGER(100),\n"
+                        + "comment VARCHAR(255)\n"
                         + ")");
             }
             
