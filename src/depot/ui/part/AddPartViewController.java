@@ -33,5 +33,9 @@ public class AddPartViewController implements Initializable {
     @FXML
     private void cancel(ActionEvent event) {
     }
+
+    @FXML
+    private void addPartCategory(ActionEvent event) {
+    }
     
 }
