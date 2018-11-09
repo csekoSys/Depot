@@ -1,5 +1,5 @@
 
-package depot.ui.part;
+package depot.ui.part.add;
 
 import depot.database.DatabaseHandler;
 import javafx.application.Application;

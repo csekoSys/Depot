@@ -1,4 +1,4 @@
-package depot.ui.part;
+package depot.ui.part.add;
 
 import depot.database.DatabaseHandler;
 import depot.pojo.CashregisterType;
@@ -27,7 +27,6 @@ public class AddPartViewController implements Initializable {
 
     private DatabaseHandler databaseHandler;
     private ObservableList<PartCategory> partCategoriesList = FXCollections.observableArrayList();
-    private ObservableList<CashregisterType> cashregisterTypesList = FXCollections.observableArrayList();
 
     @FXML
     private TextField nameField;
@@ -39,22 +38,21 @@ public class AddPartViewController implements Initializable {
     private ComboBox<PartCategory> partCategoryCBox;
     @FXML
     private AnchorPane partPane;
-    @FXML
     private VBox cashregisterTypeListAndQuntityBox;
     private GridPane crGridPane;
+    @FXML
+    private TextField placeField;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initPartCategoryCBox();
-        initCashregisterTypes();
-
     }
 
-    @FXML
-    private void addPart(ActionEvent event) {
+    private void addPart() {
         int partCategoryId = partCategoryCBox.getSelectionModel().getSelectedItem().getId();
         String partName = nameField.getText();
         String partBarcode = barcodeField.getText();
+        String partPlace = placeField.getText();
         String partComment = commentArea.getText();
 
         if (partName.isEmpty()) {
@@ -65,10 +63,11 @@ public class AddPartViewController implements Initializable {
             return;
         }
 
-        String query = "INSERT INTO PARTS (part_categories_id,name,barcode,quantity,comment) VALUES ("
+        String query = "INSERT INTO PARTS (part_categories_id,name,barcode,place,quantity,comment) VALUES ("
                 + "'" + partCategoryId + "',"
                 + "'" + partName + "',"
                 + "'" + partBarcode + "',"
+                + "'" + partPlace + "',"
                 + 0 + ","
                 + "'" + partComment + "'"
                 + ")";
@@ -88,14 +87,36 @@ public class AddPartViewController implements Initializable {
         }
     }
 
-    @FXML
-    private void cancel(ActionEvent event) {
+    private void exit() {
         Stage stage = (Stage) partPane.getScene().getWindow();
         stage.close();
     }
 
     @FXML
+    private void addPartAndCancel(ActionEvent event) {
+        addPart();
+        exit();
+    }
+
+    @FXML
+    private void addPartAndNew(ActionEvent event) {
+        addPart();
+        
+        //törölni a fieldeket
+    }
+
+    @FXML
+    private void cancel(ActionEvent event) {
+        exit();
+    }
+
+    /**
+     * Új alkatrészkategória rögzítése
+     * @param event 
+     */
+    @FXML
     private void addPartCategory(ActionEvent event) {
+        System.out.println("depot.ui.part.AddPartViewController.addPartCategory()");
     }
 
     private void loadPartCategory() {
@@ -118,43 +139,6 @@ public class AddPartViewController implements Initializable {
     private void initPartCategoryCBox() {
         loadPartCategory();
         partCategoryCBox.setItems(partCategoriesList);
-    }
-
-    private void loadCashregisterType() {
-        databaseHandler = DatabaseHandler.getInstance();
-
-        String query = "SELECT * FROM CASHREGISTER_TYPES";
-        ResultSet rs = databaseHandler.execQuery(query);
-
-        try {
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String licenseNumber = rs.getString("licensenumber");
-                String name = rs.getString("name");
-
-                cashregisterTypesList.add(new CashregisterType(id, licenseNumber, name));
-            }
-        } catch (SQLException ex) {
-        }
-    }
-
-    private void showCashregisterTypes() {
-        crGridPane = new GridPane();
-
-        for (int i = 0; i < cashregisterTypesList.size(); i++) {
-            crGridPane.add(new Label(cashregisterTypesList.get(i).getLicenseNumber()), 0, i);
-            crGridPane.getColumnConstraints().add(new ColumnConstraints(40));
-            crGridPane.add(new Label(cashregisterTypesList.get(i).getName()), 1, i);
-            crGridPane.getColumnConstraints().add(new ColumnConstraints(120));
-            crGridPane.add(new TextField("0"), 2, i);
-        }
-
-        cashregisterTypeListAndQuntityBox.getChildren().add(crGridPane);
-    }
-
-    private void initCashregisterTypes() {
-        loadCashregisterType();
-        showCashregisterTypes();
     }
 
 }
