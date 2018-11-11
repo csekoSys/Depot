@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="depot.ui.stockmove.add.AddStockMoveViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../../files/default.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="depot.ui.stockmove.add.AddStockMoveViewController">
    <children>
       <VBox layoutX="222.0" layoutY="45.0" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,7 +23,7 @@
                <children>
                   <VBox prefHeight="520.0" prefWidth="496.0">
                      <children>
-                        <GridPane>
+                        <GridPane prefHeight="315.0" prefWidth="362.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="93.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="252.0" />
@@ -27,64 +33,59 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Label text="Partner" />
                               <Label text="Mozgás" GridPane.rowIndex="1" />
-                              <ComboBox prefHeight="25.0" prefWidth="292.0" GridPane.columnIndex="1" />
-                              <ComboBox prefHeight="25.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="partnerCBox" prefHeight="25.0" prefWidth="292.0" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="moveCBox" prefHeight="25.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label text="Átadó" GridPane.rowIndex="2" />
                               <Label text="Átvevő" GridPane.rowIndex="3" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="transferringField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="recipientField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Label text="Megjegyzés" GridPane.rowIndex="4" />
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextArea fx:id="commentArea" prefHeight="117.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
                      </children>
+                     <HBox.margin>
+                        <Insets left="10.0" right="5.0" top="30.0" />
+                     </HBox.margin>
                   </VBox>
                   <VBox prefHeight="520.0" prefWidth="577.0">
                      <children>
-                        <GridPane>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="46.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="258.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label text="Keres" />
-                              <TextField GridPane.columnIndex="1" />
-                              <JFXButton text="Keres" GridPane.columnIndex="2" />
-                           </children>
-                        </GridPane>
-                        <TableView prefHeight="360.0" prefWidth="386.0">
+                        <TableView fx:id="patrsListTable" prefHeight="360.0" prefWidth="386.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
                           </columns>
                         </TableView>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label text="select item" />
+                              <HBox fx:id="selecktedPartBox" prefHeight="100.0" prefWidth="200.0">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
                            </children>
-                        </HBox>
-                        <JFXButton text="Hozzáad" />
+                        </VBox>
+                        <JFXButton onAction="#appPart" prefHeight="26.0" prefWidth="506.0" stylesheets="@../../../../files/default.css" text="Hozzáad" />
                      </children>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" top="30.0" />
+                     </HBox.margin>
                   </VBox>
-                  <VBox prefHeight="520.0" prefWidth="489.0">
-                     <children>
-                        <Label text="Tételek" />
-                     </children>
+                  <VBox fx:id="addedPartsBox" prefHeight="520.0" prefWidth="489.0">
+                     <HBox.margin>
+                        <Insets left="5.0" right="10.0" top="30.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <JFXButton prefHeight="25.0" prefWidth="174.0" text="Rögzít" />
+                  <JFXButton onAction="#addStockMove" prefHeight="26.0" prefWidth="701.0" text="Rögzít" />
                </children>
             </HBox>
          </children>
