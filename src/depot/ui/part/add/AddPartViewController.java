@@ -1,7 +1,6 @@
 package depot.ui.part.add;
 
 import depot.database.DatabaseHandler;
-import depot.pojo.CashregisterType;
 import depot.pojo.PartCategory;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -14,11 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;

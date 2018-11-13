@@ -1,6 +1,9 @@
 
 package depot.ui.stockmove.add;
 
+import depot.pojo.Part;
+import depot.pojo.Partner;
+import depot.pojo.StockMoveType;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,9 +19,9 @@ import javafx.scene.layout.VBox;
 public class AddStockMoveViewController implements Initializable {
 
     @FXML
-    private ComboBox<?> partnerCBox;
+    private ComboBox<Partner> partnerCBox;
     @FXML
-    private ComboBox<?> moveCBox;
+    private ComboBox<StockMoveType> moveCBox;
     @FXML
     private TextField transferringField;
     @FXML
@@ -26,7 +29,7 @@ public class AddStockMoveViewController implements Initializable {
     @FXML
     private TextArea commentArea;
     @FXML
-    private TableView<?> patrsListTable;
+    private TableView<Part> patrsListTable;
     @FXML
     private HBox selecktedPartBox;
     @FXML
